@@ -2,7 +2,7 @@
 #define CUSTOMMATRIX_H
 
 #include <iostream>
-#include <cstring> // For memcpy
+#include <cstring> 
 
 using namespace std;
 
@@ -13,7 +13,7 @@ public:
 
     }
 
-    // Alternate way to instantiate the class
+    
     CustomMatrix(bool m[3][3]){
         memcpy(mat, m, sizeof(mat));
     }

@@ -1,4 +1,4 @@
-#include "drawingcanvas.h"
+#include "drawingcanvas.h" 
 
 DrawingCanvas::DrawingCanvas(QWidget *parent)  {
     setMinimumSize(this->WINDOW_WIDTH, this->WINDOW_HEIGHT);
@@ -23,22 +23,22 @@ void DrawingCanvas::segmentDetection(){
 
     cout << "Starting segment detection on image of size: " << image.width() << "x" << image.height() << endl;
 
-
+    
     for(int i = 1; i < image.width() - 1; i++){
         for(int j = 1; j < image.height() - 1; j++){
 
+            
 
-
-
-            if (image.pixel(i, j) == 0xffffffff) {
+            
+            if (image.pixel(i, j) == 0xffffffff) { 
                 continue;
             }
 
-
+            
             int active_neighbors = 0;
             for(int m = -1; m <= 1; m++){
                 for(int n = -1; n <= 1; n++){
-                    if (m == 0 && n == 0) continue;
+                    if (m == 0 && n == 0) continue; 
 
                     if (image.pixel(i + m, j + n) != 0xffffffff) {
                         active_neighbors++;
@@ -46,8 +46,8 @@ void DrawingCanvas::segmentDetection(){
                 }
             }
 
-
-
+            
+            
             if (active_neighbors >= 1 && active_neighbors <= 2) {
                 m_detected_segments.append(QPoint(i, j));
             }
@@ -72,7 +72,7 @@ void DrawingCanvas::paintEvent(QPaintEvent *event){
     if(isPaintLinesClicked){
         painter.setRenderHint(QPainter::Antialiasing, false);
         pen.setColor(Qt::red);
-        pen.setWidth(1);
+        pen.setWidth(1); 
         painter.setPen(pen);
 
         for(int i = 0; i < m_points.size() - 1; i += 2){
@@ -82,12 +82,12 @@ void DrawingCanvas::paintEvent(QPaintEvent *event){
     }
 
     if(!m_detected_segments.isEmpty()){
-        pen.setColor(QColor(160, 32, 240));
+        pen.setColor(QColor(160, 32, 240)); 
         painter.setPen(pen);
         painter.setBrush(Qt::NoBrush);
 
         for(const QPoint& center : std::as_const(m_detected_segments)){
-
+            
             painter.drawRect(center.x(), center.y(), 1, 1);
         }
     }
